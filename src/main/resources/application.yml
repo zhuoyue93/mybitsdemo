@@ -1,0 +1,19 @@
+# 数据库配置
+spring:
+  #  datasource:
+  #    driver-class-name: org.h2.Driver
+  #    schema: classpath:db/schema-h2.sql
+  #    data: classpath:db/data-h2.sql
+  #    url: jdbc:h2:mem:test
+  #    username: root
+  #    password: root
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?serverTimezone=UTC
+    username: root
+    password: root
+
+# 日志配置
+logging:
+  level:
+    com.baomidou.mybatisplus.samples.quickstart: debug
