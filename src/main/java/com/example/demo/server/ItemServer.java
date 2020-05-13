@@ -2,7 +2,10 @@ package com.example.demo.server;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.example.demo.entity.Item;
+import com.example.demo.entity.ItemInfo;
+import com.example.demo.mapper.ItemInfoMapper;
 import com.example.demo.mapper.ItemMapper;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -10,11 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/item")
 public class ItemServer {
     @Resource
     private ItemMapper itemMapper;
+
+    @Resource
+    private ItemInfoMapper itemInfoMapper;
 
 
 
@@ -29,12 +36,12 @@ public class ItemServer {
     }
 
     /**
-     * 查看详情
+     * 根据pk查看详情
      * @param item item
-     * @return Item
+     * @return ItemInfo
      */
-    @RequestMapping("/infor")
-    public Item getInformation(Item item) {
-        return itemMapper.selectOne(Wrappers.<Item>lambdaQuery().eq(Item::getId,item.getId()));
+    @RequestMapping("/info")
+    public List<ItemInfo> getInformation(Item item) {
+        return itemInfoMapper.selectList(Wrappers.<ItemInfo>lambdaQuery().eq(ItemInfo::getPkItem, item.getId()));
     }
 }
